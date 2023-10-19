@@ -16,6 +16,9 @@ class App(tk.Tk):
         self.title("SPE Reader")
         self.geometry("800x600")
 
+        roi_start = 10
+        roi_end = 500
+
         figure = Figure(figsize=(6, 4), dpi=100)
         figure_canvas = FigureCanvasTkAgg(figure, self)
         NavigationToolbar2Tk(figure_canvas, self)
@@ -53,9 +56,10 @@ class App(tk.Tk):
                                 channel_start = channel_start + 1
 
                         i = i + 1
+                        
                 axes = figure.add_subplot()
-                axes.plot(channels, data)
-                axes.fill_between(channels, data, alpha=0.5)
+                axes.plot(channels[roi_start:roi_end], data[roi_start:roi_end])
+                axes.fill_between(channels[roi_start:roi_end], data[roi_start:roi_end], alpha=0.5)
                 axes.set_title(filepath)
                 axes.set_ylabel('Count')
                 axes.set_xlabel('Channel')
